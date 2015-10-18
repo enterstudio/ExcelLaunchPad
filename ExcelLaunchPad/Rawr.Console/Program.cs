@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rawr.Console
+namespace Rawr.ConsoleApp
 {
     class Program
     {
         static void Main(string[] args)
         {
+            
         }
     }
 }
