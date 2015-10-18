@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rawr.ConsoleApp
+namespace Rawr.LaunchPad.ConsoleApp
 {
     static class ConsoleExtensions
     {

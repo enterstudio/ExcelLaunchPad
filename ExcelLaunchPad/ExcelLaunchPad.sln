@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rawr.Console", "Rawr.Console\Rawr.Console.csproj", "{32197447-38FD-4704-AE2C-3C4C9C5A1B3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rawr.LaunchPad.ConsoleApp", "Rawr.Console\Rawr.LaunchPad.ConsoleApp.csproj", "{32197447-38FD-4704-AE2C-3C4C9C5A1B3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
