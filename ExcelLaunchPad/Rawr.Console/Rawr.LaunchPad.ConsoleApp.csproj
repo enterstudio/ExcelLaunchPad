@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="ConsoleExtensions.cs" />
     <Compile Include="FileLauncher.cs" />
+    <Compile Include="IFileLauncher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

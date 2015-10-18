@@ -8,9 +8,15 @@ namespace Rawr.LaunchPad.ConsoleApp
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
-            
+            var launcher = new FileLauncher();
+
+            if (!launcher.FileExists)
+            {
+                
+            }
         }
     }
 }
