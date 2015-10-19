@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppArguments.cs" />
     <Compile Include="ConsoleExtensions.cs" />
     <Compile Include="FileLauncher.cs" />
     <Compile Include="IFileLauncher.cs" />
