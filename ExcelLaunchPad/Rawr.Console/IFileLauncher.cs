@@ -2,7 +2,6 @@
 {
     public interface IFileLauncher 
     {
-        bool FileExists { get; }
-        void Launch();
+        void Launch(string filePath);
     }
 }

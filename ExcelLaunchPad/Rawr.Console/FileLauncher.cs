@@ -4,28 +4,23 @@ using System.IO.Abstractions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace Rawr.LaunchPad.ConsoleApp
 {
     public class FileLauncher : IFileLauncher
     {
-        readonly string filePath;
-        readonly FileSystem fileSystem;
+        readonly IFileSystem fileSystem;
+        static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        public FileLauncher(string filePath, FileSystem fileSystem)
+        public FileLauncher(IFileSystem fileSystem)
         {
-            this.filePath = filePath;
             this.fileSystem = fileSystem;
         }
 
-        public bool FileExists
+        public void Launch(string filePath)
         {
-            get { return fileSystem.File.Exists(filePath); } 
-        }
-
-        public void Launch()
-        {
-            throw new NotImplementedException();
+            logger.Info("About to launch: " + filePath);
         }
     }
 }
