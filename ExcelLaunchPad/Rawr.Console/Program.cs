@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO.Abstractions;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Fclp;
 using NLog;
@@ -34,6 +36,7 @@ namespace Rawr.LaunchPad.ConsoleApp
 
             var registrations = from type in Assembly.GetExecutingAssembly().GetExportedTypes()
                                 where type.GetInterfaces().Any()
+                                where type.Namespace != null && !type.Namespace.StartsWith("BitterMinion")
                                 select new { Service = type.GetInterfaces().First(), Implementation = type };
 
             var container = new Container();
@@ -42,6 +45,10 @@ namespace Rawr.LaunchPad.ConsoleApp
 
             container.Register<IFileSystem, FileSystem>();
             container.Verify();
+
+            // This is to resolve the following exceptions: "System.Runtime.InteropServices.COMException 
+            // (0x80028018): Old format or invalid type library. (Exception from HRESULT: 0x80028018 (TYPE_E_INVDATAREAD))"
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
 
             var launcher = container.GetInstance<IFileLauncher>();
             launcher.Launch(parser.Object.FilePath);

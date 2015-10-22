@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
 using System.Text;
@@ -11,16 +12,48 @@ namespace Rawr.LaunchPad.ConsoleApp
     public class FileLauncher : IFileLauncher
     {
         readonly IFileSystem fileSystem;
+        readonly IExcelWrapper excelWrapper;
         static readonly Logger logger = LogManager.GetCurrentClassLogger();
+        
 
-        public FileLauncher(IFileSystem fileSystem)
+        public FileLauncher(IFileSystem fileSystem, IExcelWrapper excelWrapper)
         {
             this.fileSystem = fileSystem;
+            this.excelWrapper = excelWrapper;
         }
 
         public void Launch(string filePath)
         {
-            logger.Info("About to launch: " + filePath);
+            if (filePath.IsNullOrEmpty())
+            {
+                // todo: display warning to user
+                logger.Error("Provided file path is null or empty.");
+                return;
+            }
+
+            if (!fileSystem.File.Exists(filePath))
+            {
+                // todo: display warning to user
+                logger.Error("File does not exist: " + filePath);
+                return;
+            }
+
+            var folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Microsoft\Excel\XLStart\");
+            var directory = fileSystem.DirectoryInfo.FromDirectoryName(folderPath);
+            var personalWorkbook = directory.GetFiles().FirstOrDefault(x => x.Name.Contains("personal", StringComparison.OrdinalIgnoreCase));
+
+            // todo: use null conditional operator! :-)
+            var personalWorkbookPath = personalWorkbook == null ? null : personalWorkbook.FullName;
+
+            try
+            {
+                excelWrapper.OpenFile(filePath, personalWorkbookPath);
+            }
+            catch (Exception ex)
+            {
+                // todo: display warning to user
+                logger.Error(ex, string.Format("Failed to open file: '{0}'", filePath));
+            }
         }
     }
 }
