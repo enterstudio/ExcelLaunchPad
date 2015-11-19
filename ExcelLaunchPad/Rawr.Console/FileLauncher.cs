@@ -40,10 +40,14 @@ namespace Rawr.LaunchPad.ConsoleApp
 
             var folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Microsoft\Excel\XLStart\");
             var directory = fileSystem.DirectoryInfo.FromDirectoryName(folderPath);
-            var personalWorkbook = directory.GetFiles().FirstOrDefault(x => x.Name.Contains("personal", StringComparison.OrdinalIgnoreCase));
 
-            // todo: use null conditional operator! :-)
-            var personalWorkbookPath = personalWorkbook == null ? null : personalWorkbook.FullName;
+            string personalWorkbookPath = null;
+            if (directory.Exists)
+            {
+                var personalWorkbook = directory.GetFiles().FirstOrDefault(x => x.Name.Contains("personal", StringComparison.OrdinalIgnoreCase));
+                if (personalWorkbook != null)
+                    personalWorkbookPath = personalWorkbook.FullName;
+            }
 
             try
             {
