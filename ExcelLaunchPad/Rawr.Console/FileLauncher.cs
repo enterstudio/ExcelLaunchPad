@@ -56,7 +56,7 @@ namespace Rawr.LaunchPad.ConsoleApp
             catch (Exception ex)
             {
                 // todo: display warning to user
-                logger.Error(ex, string.Format("Failed to open file: '{0}'", filePath));
+                logger.Error(ex, $"Failed to open file: '{filePath}'");
             }
         }
     }
