@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Excel LaunchPad")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Open Excel-compatible files in a new instance of Excel")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("RefactorsaurusRex (Nick Spreitzer)")]
-[assembly: AssemblyProduct("Rawr.ConsoleApp")]
-[assembly: AssemblyCopyright("Copyright ©  2015 RefactorsaurusRex (Nick Spreitzer)")]
+[assembly: AssemblyProduct("Excel LaunchPad")]
+[assembly: AssemblyCopyright("Copyright ©  2016 RefactorsaurusRex (Nick Spreitzer)")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
