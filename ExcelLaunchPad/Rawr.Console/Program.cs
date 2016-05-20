@@ -33,9 +33,14 @@ namespace Rawr.LaunchPad.ConsoleApp
             ICommandLineParserResult result = parser.Parse(args);
             if (result.HasErrors)
             {
-                foreach (ICommandLineParserError error in result.Errors)
-                    logger.Error("{0}: '{1}'", error, error.Option.Description);
+                var errorList = new List<string>();
+                foreach (var formattedError in result.Errors.Select(error => $"{error}: '{error.Option.Description}'"))
+                {
+                    errorList.Add(formattedError);
+                    logger.Error(formattedError);
+                }
 
+                RunErrorDialog(errorList);
                 return;
             }
 
@@ -64,8 +69,19 @@ namespace Rawr.LaunchPad.ConsoleApp
             catch (Exception exception)
             {
                 logger.Error(exception.InnerException, exception.Message);
-                Application.Run(new ErrorDialog { ErrorMessage = exception.Message });
+                RunErrorDialog(exception.Message);
             }
+        }
+
+        static void RunErrorDialog(IEnumerable<string> errors)
+        {
+            var errorText = string.Join("\r\n", errors);
+            RunErrorDialog(errorText);
+        }
+
+        static void RunErrorDialog(string error)
+        {
+            Application.Run(new ErrorDialog { ErrorMessage = error });
         }
     }
 }
