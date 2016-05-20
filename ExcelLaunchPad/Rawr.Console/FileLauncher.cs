@@ -13,8 +13,6 @@ namespace Rawr.LaunchPad.ConsoleApp
     {
         readonly IFileSystem fileSystem;
         readonly IExcelWrapper excelWrapper;
-        static readonly Logger logger = LogManager.GetCurrentClassLogger();
-        
 
         public FileLauncher(IFileSystem fileSystem, IExcelWrapper excelWrapper)
         {
@@ -25,18 +23,10 @@ namespace Rawr.LaunchPad.ConsoleApp
         public void Launch(string filePath)
         {
             if (filePath.IsNullOrEmpty())
-            {
-                // todo: display warning to user
-                logger.Error("Provided file path is null or empty.");
-                return;
-            }
+                throw new InvalidOperationException("Provided file path is null or empty.");
 
             if (!fileSystem.File.Exists(filePath))
-            {
-                // todo: display warning to user
-                logger.Error("File does not exist: " + filePath);
-                return;
-            }
+                throw new InvalidOperationException("File does not exist: " + filePath);
 
             var folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Microsoft\Excel\XLStart\");
             var directory = fileSystem.DirectoryInfo.FromDirectoryName(folderPath);
@@ -55,8 +45,7 @@ namespace Rawr.LaunchPad.ConsoleApp
             }
             catch (Exception ex)
             {
-                // todo: display warning to user
-                logger.Error(ex, $"Failed to open file: '{filePath}'");
+                throw new InvalidOperationException($"Failed to open file: '{filePath}'", ex);
             }
         }
     }

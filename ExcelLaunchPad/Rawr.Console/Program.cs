@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Fclp;
 using NLog;
 using SimpleInjector;
@@ -17,8 +18,12 @@ namespace Rawr.LaunchPad.ConsoleApp
     {
         static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        [STAThread]
         static void Main(string[] args)
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
             var parser = new FluentCommandLineParser<AppArguments>();
             parser.Setup(x => x.FilePath)
                 .As('f', "filepath")
@@ -35,7 +40,7 @@ namespace Rawr.LaunchPad.ConsoleApp
             }
 
             var registrations = from type in Assembly.GetExecutingAssembly().GetExportedTypes()
-                                where type.GetInterfaces().Any()
+                                where type.GetInterfaces().Any(x => x.Namespace != null && x.Namespace.StartsWith("Rawr"))
                                 where type.Namespace != null && !type.Namespace.StartsWith("BitterMinion")
                                 select new { Service = type.GetInterfaces().First(), Implementation = type };
 
@@ -51,7 +56,16 @@ namespace Rawr.LaunchPad.ConsoleApp
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
 
             var launcher = container.GetInstance<IFileLauncher>();
-            launcher.Launch(parser.Object.FilePath);
+
+            try
+            {
+                launcher.Launch(parser.Object.FilePath);
+            }
+            catch (Exception exception)
+            {
+                logger.Error(exception.InnerException, exception.Message);
+                Application.Run(new ErrorDialog { ErrorMessage = exception.Message });
+            }
         }
     }
 }
