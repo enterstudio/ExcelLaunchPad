@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rawr.LaunchPad.ConsoleApp", "Rawr.Console\Rawr.LaunchPad.ConsoleApp.csproj", "{32197447-38FD-4704-AE2C-3C4C9C5A1B3E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rawr.LaunchPad.Tests", "Rawr.LaunchPad.Tests\Rawr.LaunchPad.Tests.csproj", "{9424689C-0C0D-4EC1-8050-40D90AE5172D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rawr.LaunchPad.WinForms", "Rawr.LaunchPad.WinForms\Rawr.LaunchPad.WinForms.csproj", "{DE55E767-8446-4AEC-9410-780A42342E00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{9424689C-0C0D-4EC1-8050-40D90AE5172D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9424689C-0C0D-4EC1-8050-40D90AE5172D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9424689C-0C0D-4EC1-8050-40D90AE5172D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DE55E767-8446-4AEC-9410-780A42342E00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE55E767-8446-4AEC-9410-780A42342E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE55E767-8446-4AEC-9410-780A42342E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE55E767-8446-4AEC-9410-780A42342E00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
