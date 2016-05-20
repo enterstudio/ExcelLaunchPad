@@ -56,7 +56,6 @@
             this.Name = "ErrorDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Excel LaunchPad";
-            this.TopMost = true;
             this.Shown += new System.EventHandler(this.ErrorDialog_Shown);
             this.ResumeLayout(false);
 
