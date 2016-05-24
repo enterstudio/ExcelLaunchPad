@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
+using NLog;
 
 namespace Rawr.LaunchPad.Installer
 {
     public class RegistryEditor
     {
+        static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
         readonly List<string> keyNames = new List<string>
         {
             "Excel.CSV",
@@ -22,9 +25,9 @@ namespace Rawr.LaunchPad.Installer
             "Excel.Template.8",
         };
 
-        public void AddEntries(string targetPath)
+        public void AddOrUpdateEntries(string targetPath)
         {
-            foreach (var name in keyNames.Take(1))
+            foreach (var name in keyNames)
             {
                 using (var registryKey = Registry.ClassesRoot.OpenSubKey(name, true))
                 using (var shell = registryKey?.CreateSubKey("shell"))
@@ -41,7 +44,7 @@ namespace Rawr.LaunchPad.Installer
 
         public void RemoveEntries()
         {
-            foreach (var name in keyNames.Take(1))
+            foreach (var name in keyNames)
             {
                 using (var registryKey = Registry.ClassesRoot.OpenSubKey(name, true))
                 using (var shell = registryKey?.OpenSubKey("shell", true))
@@ -51,12 +54,12 @@ namespace Rawr.LaunchPad.Installer
 
                     try
                     {
-                        // Assumption: the key simply doesn't exist
-                        shell.DeleteSubKey("Open in new window");
+                        shell.DeleteSubKeyTree("Open in new window");
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e);
+                        // Assumption: exception == the key simply doesn't exist
+                        logger.Error(e, $"Attempt to delete subkey failed for '{name}'");
                     }
                 }
             }
