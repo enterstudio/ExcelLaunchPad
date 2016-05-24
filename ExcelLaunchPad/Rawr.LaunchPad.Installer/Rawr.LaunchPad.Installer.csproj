@@ -53,10 +53,17 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryEditor.cs" />
+    <Compile Include="Target.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Rawr.Console\Rawr.LaunchPad.ConsoleApp.csproj">
+      <Project>{32197447-38fd-4704-ae2c-3c4c9c5a1b3e}</Project>
+      <Name>Rawr.LaunchPad.ConsoleApp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
