@@ -6,17 +6,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentConsole.Library;
+using NLog;
 
 namespace Rawr.LaunchPad.Installer
 {
     class Program
     {
-        static void Main(string[] args)
+        static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        static void Main()
         {
             var target = new Target();
             var targetPath = target.FullPath();
             if (targetPath == null)
             {
+                logger.Error("Install failed: ExcelLaunchPad.exe does not exist in current directory");
                 "Whoops!".WriteLine(ConsoleColor.Red, 2);
 
                 ("Both ExcelLaunchPad.exe and ExcelLaunchPadInstaller.exe MUST be placed in the same directory. You can move the directory anywhere you want, " +
@@ -51,29 +55,39 @@ namespace Rawr.LaunchPad.Installer
 
         static void Install(string targetPath)
         {
+            "Installing...".WriteLine(ConsoleColor.Yellow, 1);
+
             var regEdit = new RegistryEditor();
             try
             {
-                regEdit.AddEntries(targetPath);
-                "Done! You should now be able to right-click any Excel-compatible files and select 'Open in new window'. Enjoy! :)".WriteLineWait();
+                regEdit.AddOrUpdateEntries(targetPath);
+                "Done!".WriteLine(ConsoleColor.Yellow, 1);
+                "You should now be able to right-click any Excel-compatible files and select 'Open in new window'. Enjoy! :)".WriteLineWait();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                logger.Error(e, "Installation failed.");
+                "Whoops!".WriteLine(ConsoleColor.Red, 1);
+                "Sorry, but something unexpected happened. Installation failed. Please check the logs for more details.".WriteLineWait();
             }
         }
 
         static void UnInstall()
         {
+            "Uninstalling...".WriteLine(ConsoleColor.Yellow, 1);
+
             var regEdit = new RegistryEditor();
             try
             {
                 regEdit.RemoveEntries();
-                "Done! ExcelLaunchPad has been uninstalled. You may now delete all ExcelLaunchPad files from your computer.".WriteLineWait();
+                "Done!".WriteLine(ConsoleColor.Yellow, 1);
+                "ExcelLaunchPad has been uninstalled. You may now delete all ExcelLaunchPad files from your computer.".WriteLineWait();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                logger.Error(e, "UnInstall failed.");
+                "Whoops!".WriteLine(ConsoleColor.Red, 1);
+                "Sorry, but something unexpected happened. ExcelLaunchPad was not removed. Please check the logs for more details.".WriteLineWait();
             }
         }
     }
