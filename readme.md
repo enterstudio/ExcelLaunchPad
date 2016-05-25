@@ -23,7 +23,7 @@ However! As of Excel 2013, the default behavior has been changed such that all E
 1. Head on over to the [Releases][1] page and download the latest zip file. (Download the file named: `ExcelLaunchPad.zip`. You do **not** need any of the files that say "Source code.")
 2. Extract the zip file to any location you desire on your local computer.
 3. Go to the folder where you extracted all the files, find `ExcelLaunchPadInstaller.exe`, and double click it. You'll be presented with a window like the one below.
-  - **NOTE:** Admin rights are required. Depending on your account permissions, you may be presented with a UAC dialog (see below) and/or asked to enter an administrator's passowrd.
+  - **NOTE:** Admin rights are required. Depending on your account permissions, you may be presented with a UAC dialog (see below) and/or asked to enter an administrator's password.
 4. Press `1` to install.
   - **NOTE:** If you do not already have .NET 4.5.2 installed, you will be prompted to download and install it. It's a pretty painless process and shouldn't require a restart.
 
