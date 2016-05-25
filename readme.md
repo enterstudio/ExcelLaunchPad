@@ -32,12 +32,15 @@ That's it!
 If - after you install - you decide to move Excel LaunchPad files to another location on your computer, no problem, but **remember** you **must** re-run the installer, otherwise LaunchPad will stop working.
 
 **Click Yes Here...**
+
 ![UAC Dialog][4]
 
 **Click Yes Here Too...**
+
 ![.NET Prompt][5]
 
 **Press 1 To Install Or 2 To Remove...**
+
 ![Installer Window][2]
 
 ## How to Uninstall
